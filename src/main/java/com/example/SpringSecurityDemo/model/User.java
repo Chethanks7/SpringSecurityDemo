@@ -11,11 +11,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
 @Data
 @Entity(name = "app-users")
-@Component
 public class User implements UserDetails {
 
     @Id
