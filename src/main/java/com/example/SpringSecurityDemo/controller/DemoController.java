@@ -28,11 +28,17 @@ public class DemoController {
         return userService.getAllUser();
     }
 
+
+
     @PostMapping("create-user")
     public User createUser(@RequestBody User user) {
         return userService.save(user);
     }
 
+    @PostMapping("login-page")
+    public String login(@RequestBody User user) {
+        return userService.verify(user);
+    }
     @GetMapping("csrf")
     public CsrfToken getCsrfToken(HttpServletRequest request) {
         return (CsrfToken) request.getAttribute("_csrf");
