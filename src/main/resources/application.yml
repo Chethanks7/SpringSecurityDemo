@@ -14,7 +14,4 @@ spring:
         format_sql: true
         dialect: org.hibernate.dialect.PostgreSQLDialect
         show_sql: true
-  security:
-    user:
-      name: chethan
-      password: 1234
+

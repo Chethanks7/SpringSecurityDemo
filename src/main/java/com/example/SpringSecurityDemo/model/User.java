@@ -1,13 +1,10 @@
 package com.example.SpringSecurityDemo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -20,12 +17,17 @@ public class User implements UserDetails {
     @GeneratedValue
     private Long id;
     private String username;
+    @Column(unique = true)
+    private String email ;
     private String password;
     private String phoneNumber;
 
+    @Enumerated(EnumType.STRING)
+    private Role  role;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"));
+        return Collections.singleton(new SimpleGrantedAuthority(role.name()));
     }
 
     @Override
