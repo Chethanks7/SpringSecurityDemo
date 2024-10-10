@@ -6,12 +6,12 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
@@ -53,7 +53,14 @@ public class JwtAuthConfig extends OncePerRequestFilter {
                     null,
                     myUser.getAuthorities()
             );
+
+            authToke.setDetails(
+                    new WebAuthenticationDetailsSource().buildDetails(request)
+            );
+            SecurityContextHolder.getContext().setAuthentication(authToke);
         }
+
+        filterChain.doFilter(request, response);
 
     }
 
