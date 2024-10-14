@@ -1,5 +1,6 @@
 package com.example.SpringSecurityDemo.config;
 
+import com.example.SpringSecurityDemo.model.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.security.Key;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -80,5 +82,9 @@ public class JwtService {
     private Key getSignInKey() {
         byte[] bytes = Decoders.BASE64.decode(SECRET_KEY);
         return Keys.hmacShaKeyFor(bytes);
+    }
+
+    public String generateToken(User user) {
+        return generateToken(new HashMap<>(), user);
     }
 }

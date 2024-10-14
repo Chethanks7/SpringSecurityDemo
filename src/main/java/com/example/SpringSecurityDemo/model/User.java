@@ -24,6 +24,10 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role  role;
 
+    private boolean enabled;
+    private boolean accountNonExpired;
+    private boolean accountNonLocked;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singleton(new SimpleGrantedAuthority(role.name()));
